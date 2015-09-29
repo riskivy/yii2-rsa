@@ -7,16 +7,27 @@ Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-Either run
+First you need add this to your `composer.json` file:
+```json
+{
+  "repositories": [
+    {
+      "type": "git",
+      "url": "git@github.com:ihacklog/yii2-rsa.git"
+    }
+  ],
+}
+```
+
+Then, either run
 
 ```
 php composer.phar require --prefer-dist ihacklog/yii2-rsa "*"
 ```
 
 or add
-
 ```
-"ihacklog/yii2-rsa": "*"
+"ihacklog/yii2-rsa": "*@dev"
 ```
 
 to the require section of your `composer.json` file.
