@@ -37,3 +37,10 @@ Once the extension is installed, simply use it in your code by  :
         $rsa->setPublicKeyFile($pubkey);
         var_dump($rsa->privateDecrypt($rsa->publicEncrypt('bar')));
 ```
+
+Tests
+-----
+```bash
+cd vendor/ihacklog/yii2-rsa
+codecept run
+```
