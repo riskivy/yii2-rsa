@@ -30,7 +30,7 @@ or add
 "ihacklog/yii2-rsa": "*@dev"
 ```
 
-to the require section of your `composer.json` file.
+to the `require` section of your `composer.json` file.
 
 
 Usage
