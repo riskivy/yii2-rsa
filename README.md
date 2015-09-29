@@ -28,4 +28,12 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \\ihacklog\rsa\AutoloadExample::widget(); ?>```
+<?php
+        $privateKey =  '/_data/rsa/merPkey.pem';
+        $pubkey =  '/_data/rsa/merPubKey.pem';
+        $rsa = new RSA();
+        $rsa->addProvider(new OpensslRSA());
+        $rsa->setPrivateKeyFile($privateKey);
+        $rsa->setPublicKeyFile($pubkey);
+        var_dump($rsa->privateDecrypt($rsa->publicEncrypt('bar')));
+```
