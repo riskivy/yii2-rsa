@@ -7,7 +7,7 @@
 #      History:
 =============================================================================*/
 
-namespace \ihacklog\rsa;
+namespace ihacklog\rsa;
 
 interface ISecurityProvider
 {

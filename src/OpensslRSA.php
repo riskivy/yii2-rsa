@@ -8,7 +8,7 @@
 #      History:
 =============================================================================*/
 
-namespace \ihacklog\rsa;
+namespace ihacklog\rsa;
 
 class OpensslRSA implements ISecurityProvider
 {

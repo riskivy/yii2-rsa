@@ -26,7 +26,7 @@ demo1:
 ``
 =============================================================================*/
 
-namespace \ihacklog\rsa;
+namespace ihacklog\rsa;
 
 class RSA implements ISecurityProvider
 {

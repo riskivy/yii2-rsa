@@ -52,7 +52,7 @@ class RSATest extends \PHPUnit_Framework_TestCase
 
     public function testChineseEnc()
     {
-        $enc = strtoupper(bin2hex($rsa->publicEncrypt(strtoupper(unpack('H*', '乱码哥')[1]))));
+        $enc = strtoupper(bin2hex($this->_rsa->publicEncrypt(strtoupper(unpack('H*', '乱码哥')[1]))));
         $dec = $this->_rsa->privateDecrypt(hex2bin($enc));
         $this->expectOutputString('乱码哥');
         print pack('H*', $dec);
