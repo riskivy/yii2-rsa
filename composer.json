@@ -1,0 +1,26 @@
+{
+    "name": "ihacklog/yii2-rsa",
+    "description": "yii2 rsa lib",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "荒野无灯",
+            "email": "donottellyou@ihacklog.local"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "require-dev": {
+        "codeception/codeception": "2.0.*",
+        "codeception/specify": "*",
+        "codeception/verify": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "\\ihacklog\\rsa\\": "src/"
+        }
+    }
+}
