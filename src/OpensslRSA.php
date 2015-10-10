@@ -66,18 +66,28 @@ class OpensslRSA implements ISecurityProvider
 
     public function setPublicKeyFile($pubKey)
     {
-        if (!is_readable($pubKey)) {
-            throw new Exception(sprintf('publickey file : %s is not readable!', $pubKey));
+        if (!(strpos($pubKey, '-----BEGIN PUBLIC KEY-----') === 0)) {
+            if (!is_readable($pubKey)) {
+                throw new Exception(sprintf('publickey file : %s is not readable!', $pubKey));
+            }
+            $pubKeyStr = file_get_contents($pubKey);
+        } else {
+            $pubKeyStr = $pubKey;
         }
-        $this->_publicKey = openssl_pkey_get_public(file_get_contents($pubKey));
+        $this->_publicKey = openssl_pkey_get_public($pubKeyStr);
     }
 
     public function setPrivateKeyFile($privateKey, $passphrase = "")
     {
-        if (!is_readable($privateKey)) {
-            throw new Exception(sprintf('privatekey file : %s is not readable!', $privateKey));
+        if (!(strpos($privateKey, '-----BEGIN RSA PRIVATE KEY-----') === 0)) {
+            if (!is_readable($privateKey)) {
+                throw new Exception(sprintf('privatekey file : %s is not readable!', $privateKey));
+            }
+            $privateKeyStr = file_get_contents($privateKey);
+        } else {
+            $privateKeyStr = $privateKey;
         }
-        $this->_privateKey = openssl_pkey_get_private(file_get_contents($privateKey), $passphrase);
+        $this->_privateKey = openssl_pkey_get_private($privateKeyStr, $passphrase);
     }
 
     public function privateEncrypt($dataToEncrypt)
