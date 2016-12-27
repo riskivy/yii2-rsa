@@ -16,15 +16,7 @@ class RSATest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_pkey = Yii::getAlias('@tests') . '/_data/rsa/p2p20140616.pem';
-        $this->_pubKey =  Yii::getAlias('@tests') . '/_data/rsa/p2p20140616.cer';
-        $privateKey =  $this->_pkey;
-        $pubkey =  $this->_pubKey;
-        $rsa = new RSA();
-        $rsa->addProvider(new OpensslRSA());
-        $rsa->setPrivateKeyFile($privateKey);
-        $rsa->setPublicKeyFile($pubkey);
-        $this->_rsa = $rsa;
+        $this->_rsa = Yii::$app->rsa;
     }
 
     protected function tearDown()
