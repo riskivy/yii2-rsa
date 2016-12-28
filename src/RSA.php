@@ -80,31 +80,37 @@ class RSA extends Component implements ISecurityProvider
 
     public function privateEncrypt($dataToEncrypt)
     {
+        $this->setPrivateKeyFile($this->privateKey);
         return $this->_securityProvider->privateEncrypt($dataToEncrypt);
     }
 
     public function privateDecrypt($dataToDecrypt)
     {
+        $this->setPrivateKeyFile($this->privateKey);
         return $this->_securityProvider->privateDecrypt($dataToDecrypt);
     }
 
     public function publicEncrypt($dataToEncrypt)
     {
+        $this->setPublicKeyFile($this->publicKey);
         return $this->_securityProvider->publicEncrypt($dataToEncrypt);
     }
 
     public function publicDecrypt($dataToDecrypt)
     {
+        $this->setPublicKeyFile($this->publicKey);
         return $this->_securityProvider->publicDecrypt($dataToDecrypt);
     }
 
     public function sign($data, $signatureAlg = 'sha1')
     {
+        $this->setPrivateKeyFile($this->privateKey);
         return $this->_securityProvider->sign($data, $signatureAlg);
     }
 
     public function verify($data, $signature, $signatureAlg = 'sha1')
     {
+        $this->setPublicKeyFile($this->publicKey);
          return $this->_securityProvider->verify($data, $signature, $signatureAlg);
     }
 }//end class

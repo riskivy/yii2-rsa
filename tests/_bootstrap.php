@@ -9,18 +9,23 @@ require_once($yiiBasePath . '/vendor/autoload.php');
 require_once($yiiBasePath . '/vendor/yiisoft/yii2/Yii.php');
 
 Yii::setAlias('@tests', __DIR__);
-Yii::setAlias('@ihacklog/rsa', __DIR__ . '../src/');
+Yii::setAlias('@ihacklog/rsa', __DIR__ . '/../src/');
 
 new \yii\console\Application([
     'id' => 'unit',
     'basePath' => $yiiBasePath,
+    'aliases' => [
+        '@ihacklog/rsa' => __DIR__ . '/../src/',
+    ],
     'components' => [
         'rsa' => [
-            'class' => ihacklog\rsa\RSA::class,
+            'class' => 'ihacklog\rsa\RSA',
             'publicKey' => Yii::getAlias('@tests') . '/_data/rsa/p2p20140616.cer',
             'privateKey' => Yii::getAlias('@tests') . '/_data/rsa/p2p20140616.pem',
             'services' => [
-                'class' => ihacklog\rsa\OpensslRSA::class,
+                'OpensslRSA' => [
+                    'class' => 'ihacklog\rsa\OpensslRSA',
+                ]
             ]
         ]
     ]
