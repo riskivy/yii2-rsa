@@ -31,7 +31,7 @@ namespace ihacklog\rsa;
 use yii\base\Component;
 use Yii;
 
-class RSA implements ISecurityProvider
+class RSA extends Component implements ISecurityProvider
 {
     public $services;
     public $provider = 'OpensslRSA';
@@ -40,9 +40,11 @@ class RSA implements ISecurityProvider
 
     private $_securityProvider = null;
 
-    public function init() {
+    public function init()
+    {
         if (count($this->services) == 0) {
             \Yii::error('No ISecurityProvider configured');
+            throw new \Exception('No ISecurityProvider configured');
             return false;
         }
 
@@ -50,13 +52,14 @@ class RSA implements ISecurityProvider
         if ($provider === null) {
             $provider = array_keys($this->services)[0];
         }
+        // my use other provider like: https://github.com/jedisct1/libsodium-php
         $this->provider = $provider;
-        $this->addProvider(Yii::createObject($this->services[$provider]));
+        $this->setProvider(Yii::createObject($this->services[$provider]));
         $this->setPrivateKeyFile($this->privateKey);
         $this->setPublicKeyFile($this->publicKey);
     }
 
-    public function addProvider(ISecurityProvider $sp)
+    public function setProvider(ISecurityProvider $sp)
     {
         if ($sp instanceof ISecurityProvider) {
             $this->_securityProvider = $sp;
