@@ -53,7 +53,14 @@ Once the extension is installed, simply use it in your code by  :
 ```php
 <?php
         var_dump($rsa->privateDecrypt($rsa->publicEncrypt('bar')));
+        
+#正确的方法 
+
+           $s1= \Yii::$app->rsa->publicEncrypt('bar');  
+           echo \Yii::$app->rsa->privateDecrypt($s1);   
+
 ```
+
 
 Tests
 -----
