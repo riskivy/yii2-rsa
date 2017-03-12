@@ -2,9 +2,6 @@
 namespace tests;
 
 use Yii;
-use ihacklog\rsa\ISecurityProvider;
-use ihacklog\rsa\OpensslRSA;
-use ihacklog\rsa\RSA;
 
 class RSATest extends \PHPUnit_Framework_TestCase
 {
@@ -16,15 +13,7 @@ class RSATest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->_pkey = Yii::getAlias('@tests') . '/_data/rsa/p2p20140616.pem';
-        $this->_pubKey =  Yii::getAlias('@tests') . '/_data/rsa/p2p20140616.cer';
-        $privateKey =  $this->_pkey;
-        $pubkey =  $this->_pubKey;
-        $rsa = new RSA();
-        $rsa->addProvider(new OpensslRSA());
-        $rsa->setPrivateKeyFile($privateKey);
-        $rsa->setPublicKeyFile($pubkey);
-        $this->_rsa = $rsa;
+        $this->_rsa = Yii::$app->rsa;
     }
 
     protected function tearDown()
@@ -34,7 +23,6 @@ class RSATest extends \PHPUnit_Framework_TestCase
     // tests
     public function testPublicEnc()
     {
-
         $this->assertEquals($this->_rsa->privateDecrypt($this->_rsa->publicEncrypt('bar')), 'bar');
     }
 
@@ -92,11 +80,9 @@ class RSATest extends \PHPUnit_Framework_TestCase
     public function testPlatformSign()
     {
         $pubkey =  Yii::getAlias('@tests') . '/_data/rsa/TLgongyao.cer';
-        $rsa = new RSA();
-        $rsa->addProvider(new OpensslRSA());
-        $rsa->setPublicKeyFile($pubkey);
+        Yii::$app->rsa->publicKey = $pubkey;
         $plainText = '{"errorMsg":"提交成功","memberId":"201406205939508","pId":"98C1513A6A11B73E721104AFD8DC1C140E22872F1A5F19F7ED724BF9C2E54019231DBA80F36D02D4817F1946FDB927E26B7AF6D4553BA2EF0C1DC907CCB2B977EA1175431145C88CC8E2B42179567CBA1F109CC2BE101713DF9F2EBF091E68A232B77C0705A8310987105D0F3B2E2CD6A49BDD035FFBEAD57F3AA6D993815FFF","reqSn":"20140613105100120140704100241001","resSn":"201406131051001201407041002079610447","resTime":"20140704100207","retCode":"100000","trxCode":"1002","typesOfCertificate":"0","userName":"233C2F59A32F4554473BA4007C38F33875F71F63F652C8CB1BD95A776C919ED150CB6C49C2811A1A68CB8BC495B8BA8441087B0D172CE6B52C1A17A8CCFB81A7EF16E5E437860395439BCA95718A30D721DFDDD6627AE7AD9C9069F731270767F7D5F6DE012F28F240391A2454647B946716B6D3E07166CBB2DF2C6C150EA880","userStatus":"0","version":"1.0"}';
         $sign = 'pAG0DTY5uLPkNS9u0X373yFw5wYPM6jPgrMH6oUvvhmz0yrOSdbib2etSrA6HXOwULMn0SnDRfOdVWicL25/6yD/7ZXGU1ZhdAJgmh710GsMQ28mzZ+DlJ7TdKJOUiV5lC3jlzCXHlBOAk6nRLPw0eEd0l7uV6uEfHJiDyub1Kc=';
-        $this->assertTrue($rsa->verify(strtoupper(md5($plainText)), base64_decode($sign)));
+        $this->assertTrue(Yii::$app->rsa->verify(strtoupper(md5($plainText)), base64_decode($sign)));
     }
 }

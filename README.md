@@ -35,17 +35,23 @@ to the `require` section of your `composer.json` file.
 
 Usage
 -----
+components 
 
+        'rsa' => [
+            'class' => 'ihacklog\rsa\RSA',
+            'publicKey' => $vendorDir . '/ihacklog/yii2-rsa/tests/_data/rsa/p2p20140616.cer',
+            'privateKey' => $vendorDir . '/ihacklog/yii2-rsa/tests/_data/rsa/p2p20140616.pem',
+            'services' => [
+                'OpensslRSA' => [
+                    'class' => ihacklog\rsa\OpensslRSA::class,
+                ]
+            ]
+        ],
+        
 Once the extension is installed, simply use it in your code by  :
 
 ```php
 <?php
-        $privateKey =  '/_data/rsa/merPkey.pem';
-        $pubkey =  '/_data/rsa/merPubKey.pem';
-        $rsa = new RSA();
-        $rsa->addProvider(new OpensslRSA());
-        $rsa->setPrivateKeyFile($privateKey);
-        $rsa->setPublicKeyFile($pubkey);
         var_dump($rsa->privateDecrypt($rsa->publicEncrypt('bar')));
 ```
 

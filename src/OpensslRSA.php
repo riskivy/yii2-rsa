@@ -10,7 +10,9 @@
 
 namespace ihacklog\rsa;
 
-class OpensslRSA implements ISecurityProvider
+use yii\base\Component;
+
+class OpensslRSA extends Component implements ISecurityProvider
 {
     private $_privateKey = '';
 
