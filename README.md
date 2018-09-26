@@ -1,6 +1,6 @@
 yii2-rsa
 ========
-yii2 rsa lib demoxxx by 20170405
+YII2 openssl rsa 加密 签名
 
 Installation
 ------------
@@ -13,7 +13,7 @@ First you need add this to your `composer.json` file:
   "repositories": [
     {
       "type": "git",
-      "url": "git@github.com:ihacklog/yii2-rsa.git"
+      "url": "git@github.com:riskivy/yii2-rsa.git"
     }
   ],
 }
@@ -22,7 +22,7 @@ First you need add this to your `composer.json` file:
 Then, either run
 
 ```
-php composer.phar require --prefer-dist ihacklog/yii2-rsa "*"
+composer require riskivy/yii2-rsa
 ```
 
 or add
