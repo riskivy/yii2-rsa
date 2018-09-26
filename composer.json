@@ -1,13 +1,13 @@
 {
-    "name": "ihacklog/yii2-rsa",
+    "name": "riskivy/yii2-rsa",
     "description": "yii2 rsa lib",
     "type": "yii2-extension",
     "keywords": ["yii2","extension"],
     "license": "GPL-3.0",
     "authors": [
         {
-            "name": "荒野无灯",
-            "email": "donottellyou@ihacklog.local"
+            "name": "Jack",
+            "email": "jack@riskivy.local"
         }
     ],
     "require": {
