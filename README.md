@@ -27,7 +27,7 @@ composer require riskivy/yii2-rsa
 
 or add
 ```
-"ihacklog/yii2-rsa": "*@dev"
+"riskivy/yii2-rsa": "*@dev"
 ```
 
 to the `require` section of your `composer.json` file.
@@ -39,11 +39,11 @@ components
 
         'rsa' => [
             'class' => 'ihacklog\rsa\RSA',
-            'publicKey' => $vendorDir . '/ihacklog/yii2-rsa/tests/_data/rsa/p2p20140616.cer',
-            'privateKey' => $vendorDir . '/ihacklog/yii2-rsa/tests/_data/rsa/p2p20140616.pem',
+            'publicKey' => $vendorDir . '/riskivy/yii2-rsa/tests/_data/rsa/p2p20140616.cer',
+            'privateKey' => $vendorDir . '/riskivy/yii2-rsa/tests/_data/rsa/p2p20140616.pem',
             'services' => [
                 'OpensslRSA' => [
-                    'class' => ihacklog\rsa\OpensslRSA::class,
+                    'class' => riskivy\rsa\OpensslRSA::class,
                 ]
             ]
         ],
