@@ -8,7 +8,7 @@
 #      History:
 =============================================================================*/
 
-namespace ihacklog\rsa;
+namespace riskivy\rsa;
 
 use yii\base\Component;
 
@@ -61,7 +61,7 @@ class OpensslRSA extends Component implements ISecurityProvider
     private function getDigestMethod($sigAlgo)
     {
         if (!in_array($sigAlgo, openssl_get_md_methods())) {
-            throw new Exception('invalid signature algo!');
+            throw new \Exception('invalid signature algo!');
         }
         return $sigAlgo;
     }
@@ -70,7 +70,7 @@ class OpensslRSA extends Component implements ISecurityProvider
     {
         if (!(strpos($pubKey, '-----BEGIN PUBLIC KEY-----') === 0)) {
             if (!is_readable($pubKey)) {
-                throw new Exception(sprintf('publickey file : %s is not readable!', $pubKey));
+                throw new \Exception(sprintf('publickey file : %s is not readable!', $pubKey));
             }
             $pubKeyStr = file_get_contents($pubKey);
         } else {
@@ -83,7 +83,7 @@ class OpensslRSA extends Component implements ISecurityProvider
     {
         if (!(strpos($privateKey, '-----BEGIN RSA PRIVATE KEY-----') === 0)) {
             if (!is_readable($privateKey)) {
-                throw new Exception(sprintf('privatekey file : %s is not readable!', $privateKey));
+                throw new \Exception(sprintf('privatekey file : %s is not readable!', $privateKey));
             }
             $privateKeyStr = file_get_contents($privateKey);
         } else {
