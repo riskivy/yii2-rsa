@@ -1,13 +1,6 @@
 <?php
-/*=============================================================================
-#     FileName: ISecurity.php
-#         Desc:
-#       Author: 荒野无灯
-#   LastChange: 2014-07-02 18:33:11
-#      History:
-=============================================================================*/
 
-namespace ihacklog\rsa;
+namespace riskivy\rsa;
 
 interface ISecurityProvider
 {

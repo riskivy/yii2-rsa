@@ -7,40 +7,20 @@ Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
-First you need add this to your `composer.json` file:
-```json
-{
-  "repositories": [
-    {
-      "type": "git",
-      "url": "git@github.com:riskivy/yii2-rsa.git"
-    }
-  ],
-}
-```
-
-Then, either run
+First run
 
 ```
 composer require riskivy/yii2-rsa
 ```
-
-or add
-```
-"riskivy/yii2-rsa": "*@dev"
-```
-
-to the `require` section of your `composer.json` file.
-
 
 Usage
 -----
 components 
 
         'rsa' => [
-            'class' => 'ihacklog\rsa\RSA',
-            'publicKey' => $vendorDir . '/riskivy/yii2-rsa/tests/_data/rsa/p2p20140616.cer',
-            'privateKey' => $vendorDir . '/riskivy/yii2-rsa/tests/_data/rsa/p2p20140616.pem',
+            'class' => 'riskivy\rsa\RSA',
+            'publicKey' => 'path/to/publicKey.pem',
+            'privateKey' => 'path/to/privateKey.pem',
             'services' => [
                 'OpensslRSA' => [
                     'class' => riskivy\rsa\OpensslRSA::class,
@@ -51,24 +31,47 @@ components
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?php
+
+        //use file path
         $publicKey = Yii::$app->rsa->publicKey;
         $privateKey = Yii::$app->rsa->privateKey;
-        
-        $rsa       = new RSA();
-        $rsa->addProvider(new OpensslRSA());
-        $rsa->setPublicKeyFile($publicKey);
-        $rsa->setPrivateKeyFile($privateKey);
-        
-        $s1= $rsa->publicEncrypt('bar');  
-        echo $rsa->privateDecrypt($s1);   
+
+        //use file content
+//        $publicKey = <<<EOF
+//-----BEGIN RSA PRIVATE KEY-----
+//xxxxxxxxx
+//-----END RSA PRIVATE KEY-----
+//EOF;
+//        $publicKey = <<<EOF
+//-----BEGIN PUBLIC KEY-----
+//xxxxxxxxx
+//-----END PUBLIC KEY-----
+//EOF;
+
+        try{
+            $rsa       = new RSA();
+            $rsa->addProvider(new OpensslRSA());
+            $rsa->setPublicKeyFile($publicKey);
+            $rsa->setPrivateKeyFile($privateKey);
+
+            $s1= $rsa->publicEncrypt('bar');
+            var_dump(base64_encode($s1));
+            var_dump($rsa->privateDecrypt($s1));
+
+        }catch(\Exception $e){
+
+            var_dump($e->getMessage());die;
+        }
+
 
 ```
 
 
-Tests
------
+Get rsa_private_key and rsa_public_key
+
+-----------------------
+
 ```bash
-cd vendor/ihacklog/yii2-rsa
-codecept run
+openssl genrsa -out rsa_private_key.pem 512
+openssl rsa -in rsa_private_key.pem -pubout -out rsa_public_key.pem
 ```
